@@ -1,1 +1,317 @@
-<h1>heading</h1>
+
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+    
+
+
+    .multipleSelhift {
+  background-color: #fff;
+  color: #f2f2f2;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+    }
+
+    .selectBox {
+      position: relative;
+    }
+
+    .selectBox select {
+      width: 100%;
+      font-weight: normal;
+    }
+
+    .overSelect {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+
+
+
+
+
+/*    */
+    #checkShift {
+      display: none;
+      border: 1px #bfbfbf solid;
+      max-height: 150px; /* Set the maximum height for scrollable options */
+      overflow-y: auto; 
+    }
+
+    #checkShift label {
+      display: block;
+    }
+
+    #checkShift label:hover {
+      background-color: #4F615E;
+    }
+      .ribbon{
+        margin-left: 20px;
+      }
+      .card{
+          background-color: #333;
+        color: white;
+        padding: 10px 10px;
+        border: none;
+        /*cursor: pointer;*/
+        /*width-left: 75px;*/
+        /*margin-bottom:10px;*/
+        /*transition: filter 0.1s ease;*/
+        /*font-size: 16px;*/
+        height: 44px;
+        border-radius: 8px;
+
+        min-width:75px;
+      }
+      .date{
+          padding: 10px;border: none;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        width: 150px;
+        font-size: 16px;
+        display: inline-block;
+        /*vertical-align: middle;*/
+        /*height: 44px;*/
+  
+      }
+      .select{
+          padding: 10px;border: none;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        width: 150px;
+        font-size: 16px;
+        display: inline-block;
+        background-color: #fff;
+        /*vertical-align: middle;*/
+        /*height: 44px;*/
+  
+      }
+      .multipleSelection{
+        display: inline-block;
+      }
+      .multipleSelection select{
+        padding: 10px;border: none;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        background-color: #fff;
+        width: 150px;
+        display: inline-block;
+      }
+      .multipleSelection .m_select{
+        padding: 10px;border: none;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        background-color: #fff;
+        /*width: 200px;*/
+        /*display: inline-block;*/
+
+        /*vertical-align: middle;*/
+          position: absolute;
+          z-index: 1;
+      }
+      .ribbon button{
+          background-color: #333;
+        color: white;
+        padding: 10px 10px;
+        border: none;
+        cursor: pointer;
+        /*width-left: 75px;*/
+        /*margin-bottom:10px;*/
+        transition: filter 0.1s ease;
+        font-size: 16px;
+        border-radius: 8px;
+
+        min-width:75px;
+      }  
+    .custom-input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      background-color: #fff;
+      z-index: 1;
+      width: 200px; /* Adjust the width as needed */
+    }
+	</style>
+</head>
+<body>
+
+
+        <div class="multipleSelection">
+          <div class="selectBox" onclick="showCheckShift(event)">
+            <select id="mySelectShift">
+              <option>Shift</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+
+          <div id="checkShift" class="m_select">
+            <label >
+              <input type="checkbox" onclick="Select_All_Shift(this)">
+              Select all
+            </label>
+            <label>
+              <input type="checkbox" value="G" id="5" class="shift">
+              Shift G
+            </label>
+            
+            <label>
+              <input type="checkbox" value="A" id="12" class="shift">
+              Shift A
+            </label>
+            <label >
+              <input type="checkbox" value="B" id="13" class="shift">
+              Shift B
+            </label>
+            <label>
+              <input type="checkbox" value="C" id="14" class="shift">
+              Shift C
+            </label>
+          </div>
+        </div>
+
+
+<script type="text/javascript">
+	
+var showShift = true;
+var shift='';
+
+  if (shift !== undefined && shift !== null && shift !== '') {
+    
+
+    // Split the shift string into an array of values
+
+    var shiftValues = shift.split(',');
+    // Check the checkboxes corresponding to the shift values
+    shiftValues.forEach(function(value) {
+      var checkbox = document.querySelector('.shift[id="' + value + '"]');
+      if (checkbox) {
+        checkbox.checked = true;
+      }
+    });
+    display_Shift();
+  }
+  else{
+    var currentTime = new Date();
+    var currentHour = currentTime.getHours();
+
+
+    if (currentHour >= 9 && currentHour < 17.30) {
+      var checkbox = document.querySelector('.shift[id="' + 5 + '"]');
+    } else if (currentHour >= 6 && currentHour < 14.30) {
+      var checkbox = document.querySelector('.shift[id="' + 12 + '"]');
+    } else if (currentHour >= 14.30 || currentHour < 23) {
+      var checkbox = document.querySelector('.shift[id="' + 13 + '"]');
+    } else if (currentHour >= 23 || currentHour < 6){
+      var checkbox = document.querySelector('.shift[id="' + 14 + '"]');
+    }
+    checkbox.checked = true;
+    display_Shift();
+
+  }
+
+
+
+    function showCheckShift(event) {
+      var checkboxes = document.getElementById("checkShift");
+
+      if (showShift) {
+        checkboxes.style.display = "block";
+        showShift= false;
+      } else {
+        
+        checkboxes.style.display = "none";
+        showShift = true;
+		display_Shift();
+        fetchTableData(getSelectedDate(),getSelectedShift(),getSelectedDepartment(),getSelectedSection());
+        event.stopPropagation();
+      }
+    }
+
+    document.addEventListener('click', function(event) {
+        var dropdown = document.getElementById("checkShift");
+        // Check if the clicked element is not within the selectBox or dropdown
+
+
+        if (!event.target.closest(".selectBox") && !event.target.closest("#checkShift") && showShift==false) {
+            dropdown.style.display = "none";
+            showShift = true;
+ 			display_Shift();
+        	fetchTableData(getSelectedDate(),getSelectedShift(),getSelectedDepartment(),getSelectedSection());
+        }
+
+    });
+
+// ~~~~~~~~ Shift ~~~~~~~~
+   
+
+
+
+	function Select_All_Shift(checkbox) {
+	  var checkboxes = document.querySelectorAll("#checkShift input[type='checkbox']");
+	  for (var i = 0; i < checkboxes.length; i++) {
+	    checkboxes[i].checked = checkbox.checked;
+	  }
+
+	  // var selectAllCheckbox = document.getElementById("selectAll");
+	  // selectAllCheckbox.checked = checkbox.checked;
+
+
+	}
+
+	function display_Shift() {
+	  var s = [];
+
+	  var checkboxes = document.querySelectorAll("#checkShift input[type='checkbox']");
+	  for (var i = 0; i < checkboxes.length; i++) {
+	    if (checkboxes[i].checked) {
+	      if (checkboxes[i].parentNode.innerText.trim() != "Select all") {
+	        s.push(checkboxes[i].value);
+	      }
+	    }
+	  }
+
+	  var selectBox = document.getElementById("mySelectShift");
+	  selectBox.options[0].text = s.join(", ") || "Shift";
+
+	}
+
+
+  //For select all feature 
+  $(document).ready(function() {
+    $('#select-all-checkbox').on('click', function() {
+      $('input[name="checking[]"]').prop('checked', this.checked);
+    });
+
+    $('input[name="checking[]"]').on('click', function() {
+      if (!this.checked) {
+        $('#select-all-checkbox').prop('checked', false);
+      } else {
+        const allChecked = $('input[name="checking[]"]').toArray().every(c => c.checked);
+        $('#select-all-checkbox').prop('checked', allChecked);
+      }
+    });
+  });
+
+</script>
+
+</body>
+</html>
